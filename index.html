@@ -61,77 +61,100 @@
         btn2.classList.add("bntInactive")
         btn2.classList.remove("bntActive")
     }
+
+    function send() {
+        const data = {
+            requestType: document.getElementById("helpRequest").checked ? "helpRequest" : "helpProposal",
+            helpType: document.getElementById("helpType").value,
+            location: document.getElementById("location").value,
+            quantity: document.getElementById("quantity").value,
+            contactName: document.getElementById("contactName").value,
+            contactPhone: document.getElementById("contactPhone").value,
+            notes: document.getElementById("contactPhone").value,
+        }
+
+        fetch("/post/data/here", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log(res);
+            alert("Request complete, see browser console for response")
+        }).catch(error => {
+            alert("Error: " +  error);
+        })
+    }
 </script>
 
 <body style="font-family: Verdana, sans-serif; margin-left: 5rem; margin-top: 3rem">
 
 <div>
-    <form action="/action_page.php">
-        <div class="blockTitle">Тип запроса</div>
+    <div class="blockTitle">Тип запроса</div>
 
-        <div style="display: none">
-            <input type="radio" id="helpRequest" name="requestType" value="helpRequest" checked>
-            <label for="helpRequest">helpRequest</label><br>
-            <input type="radio" id="helpProposal" name="requestType" value="helpProposal">
-            <label for="helpProposal">helpProposal</label><br>
-        </div>
+    <div style="display: none">
+        <input type="radio" id="helpRequest" name="requestType" value="helpRequest" checked>
+        <label for="helpRequest">helpRequest</label><br>
+        <input type="radio" id="helpProposal" name="requestType" value="helpProposal">
+        <label for="helpProposal">helpProposal</label><br>
+    </div>
 
-        <div class="block" >
-            <div id="btn-helpRequest" class="btn bntActive" onclick="btnHandler('helpRequest')">
-                Запрос
-                <br>Помощи
-            </div>
-            <div id="btn-helpProposal" class="btn bntInactive" style="margin-left: 1rem;" onclick="btnHandler('helpProposal')">
-                Предложение
-                <br>
-                Помощи
-            </div>
+    <div class="block" >
+        <div id="btn-helpRequest" class="btn bntActive" onclick="btnHandler('helpRequest')">
+            Запрос
+            <br>Помощи
         </div>
+        <div id="btn-helpProposal" class="btn bntInactive" style="margin-left: 1rem;" onclick="btnHandler('helpProposal')">
+            Предложение
+            <br>
+            Помощи
+        </div>
+    </div>
 
-        <label class="blockTitle" for="helpType">Тип помощи</label>
-        <div class="block">
-            <select name="helpType" id="helpType" style="font-size: 18px">
-                <option value="1">Жилье</option>
-                <option value="2">Инфо поддержка</option>
-                <option value="3">Трансфер по Германии</option>
-                <option value="4">Сопровождение по городу</option>
-                <option value="5">Сопровождение переводчика</option>
-                <option value="6">Перевод документов</option>
-                <option value="7">Одежда</option>
-                <option value="8">Запись к врачу</option>
-                <option value="9">Психологическая помощь</option>
-            </select>
-        </div>
+    <label class="blockTitle" for="helpType">Тип помощи</label>
+    <div class="block">
+        <select name="helpType" id="helpType" style="font-size: 18px">
+            <option value="1">Жилье</option>
+            <option value="2">Инфо поддержка</option>
+            <option value="3">Трансфер по Германии</option>
+            <option value="4">Сопровождение по городу</option>
+            <option value="5">Сопровождение переводчика</option>
+            <option value="6">Перевод документов</option>
+            <option value="7">Одежда</option>
+            <option value="8">Запись к врачу</option>
+            <option value="9">Психологическая помощь</option>
+        </select>
+    </div>
 
-        <label class="blockTitle" for="location">Где</label>
-        <div class="block">
-            <input class="txt" name="location" id="location" type="text" alt="location">
-        </div>
+    <label class="blockTitle" for="location">Где</label>
+    <div class="block">
+        <input class="txt" name="location" id="location" type="text" alt="location">
+    </div>
 
-        <label class="blockTitle" for="quantity">Количество человек</label>
-        <div class="block">
-            <input class="txt" name="quantity" id="quantity" type="text" alt="quantity">
-        </div>
+    <label class="blockTitle" for="quantity">Количество человек</label>
+    <div class="block">
+        <input class="txt" name="quantity" id="quantity" type="text" alt="quantity">
+    </div>
 
-        <label class="blockTitle" for="contactName">Контактное имя</label>
-        <div class="block">
-            <input class="txt" name="contactName" id="contactName" type="text" alt="contactName"/>
-        </div>
+    <label class="blockTitle" for="contactName">Контактное имя</label>
+    <div class="block">
+        <input class="txt" name="contactName" id="contactName" type="text" alt="contactName"/>
+    </div>
 
-        <label class="blockTitle" for="contactPhone">Контактный телефон</label>
-        <div class="block">
-            <input class="txt" name="contactPhone" id="contactPhone" type="text" alt="contactPhone">
-        </div>
+    <label class="blockTitle" for="contactPhone">Контактный телефон</label>
+    <div class="block">
+        <input class="txt" name="contactPhone" id="contactPhone" type="text" alt="contactPhone">
+    </div>
 
-        <label class="blockTitle" for="notes">Заметки</label>
-        <div class="block">
-            <input class="txt" name="notes" id="notes" type="text" alt="notes">
-        </div>
+    <label class="blockTitle" for="notes">Заметки</label>
+    <div class="block">
+        <input class="txt" name="notes" id="notes" type="text" alt="notes">
+    </div>
 
-        <div class="block" style="margin-top: 2rem;">
-            <input type="submit" class="btn" value="Отправить">
+    <div class="block" style="margin-top: 2rem;">
+        <div class="btn" onclick="send()">
+            Отправить
         </div>
-    </form>
+    </div>
 </div>
 
 </body>
