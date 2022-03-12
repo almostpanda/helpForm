@@ -6,15 +6,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Help Form</title>
 
-    <link rel="icon" href="/favicon.ico">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        .blockTitle {
+            display: block;
+            margin-top: 1rem;
+            width: 70%;
+        }
+        .block {
+            margin-top: .5rem;
+            width: 70%;
+        }
+        .btn {
+            display: inline-block;
+            background-color: beige;
+            padding: 0.5rem;
+            width: 10rem;
+            cursor: pointer;
+            border: 1px solid gray;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .bntActive {
+            color: black;
+            font-weight: bold;
+        }
+        .bntInactive {
+            color: gray;
+            font-weight: normal;
+        }
 
+        .txt {
+            font-size: 20px;
+            width: 20rem;
+        }
 
+    </style>
 </head>
 
-<body>
-Content
-</body>
+<script>
+    function btnHandler(id) {
+        const elem = document.getElementById(id)
+        elem.checked = true;
 
+        const btn1 = document.getElementById("btn-" + id);
+        btn1.classList.add("bntActive")
+        btn1.classList.remove("bntInactive")
+
+        const id2 = id === "helpRequest" ? "helpProposal" : "helpRequest";
+        const elem2 = document.getElementById(id2);
+        elem2.checked = false;
+
+        const btn2 = document.getElementById("btn-" + id2);
+        btn2.classList.add("bntInactive")
+        btn2.classList.remove("bntActive")
+    }
+</script>
+
+<body style="font-family: Verdana, sans-serif; margin-left: 5rem; margin-top: 3rem">
+
+<div>
+    <form action="/action_page.php">
+        <div class="blockTitle">Тип запроса</div>
+
+        <div style="display: none">
+            <input type="radio" id="helpRequest" name="requestType" value="helpRequest" checked>
+            <label for="helpRequest">helpRequest</label><br>
+            <input type="radio" id="helpProposal" name="requestType" value="helpProposal">
+            <label for="helpProposal">helpProposal</label><br>
+        </div>
+
+        <div class="block" >
+            <div id="btn-helpRequest" class="btn bntActive" onclick="btnHandler('helpRequest')">
+                Запрос
+                <br>Помощи
+            </div>
+            <div id="btn-helpProposal" class="btn bntInactive" style="margin-left: 1rem;" onclick="btnHandler('helpProposal')">
+                Предложение
+                <br>
+                Помощи
+            </div>
+        </div>
+
+        <label class="blockTitle" for="helpType">Тип помощи</label>
+        <div class="block">
+            <select name="helpType" id="helpType" style="font-size: 18px">
+                <option value="1">Жилье</option>
+                <option value="2">Инфо поддержка</option>
+                <option value="3">Трансфер по Германии</option>
+                <option value="4">Сопровождение по городу</option>
+                <option value="5">Сопровождение переводчика</option>
+                <option value="6">Перевод документов</option>
+                <option value="7">Одежда</option>
+                <option value="8">Запись к врачу</option>
+                <option value="9">Психологическая помощь</option>
+            </select>
+        </div>
+
+        <label class="blockTitle" for="location">Где</label>
+        <div class="block">
+            <input class="txt" name="location" id="location" type="text" alt="location">
+        </div>
+
+        <label class="blockTitle" for="quantity">Количество человек</label>
+        <div class="block">
+            <input class="txt" name="quantity" id="quantity" type="text" alt="quantity">
+        </div>
+
+        <label class="blockTitle" for="contactName">Контактное имя</label>
+        <div class="block">
+            <input class="txt" name="contactName" id="contactName" type="text" alt="contactName"/>
+        </div>
+
+        <label class="blockTitle" for="contactPhone">Контактный телефон</label>
+        <div class="block">
+            <input class="txt" name="contactPhone" id="contactPhone" type="text" alt="contactPhone">
+        </div>
+
+        <label class="blockTitle" for="notes">Заметки</label>
+        <div class="block">
+            <input class="txt" name="notes" id="notes" type="text" alt="notes">
+        </div>
+
+        <div class="block" style="margin-top: 2rem;">
+            <input type="submit" class="btn" value="Отправить">
+        </div>
+    </form>
+</div>
+
+</body>
 
 </html>
